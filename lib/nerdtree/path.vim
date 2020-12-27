@@ -576,7 +576,10 @@ endfunction
 " slashes while in other versions it doesn't.  This always removes the trailing
 " slash
 function! s:Path.Resolve(path)
-    let tmp = resolve(a:path)
+    let tmp = a:path
+    if tmp =~ "floatjs/common/src"
+      let tmp = substitute(tmp, "floatjs/common/src", "floatjs/web/_common", "")
+    endif
     return tmp =~# '.\+/$' ? substitute(tmp, '/$', '', '') : tmp
 endfunction
 
